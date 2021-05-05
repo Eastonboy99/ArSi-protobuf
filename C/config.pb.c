@@ -6,30 +6,7 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(ControllerInput, ControllerInput, AUTO)
-
-
-PB_BIND(TX, TX, AUTO)
-
-
-PB_BIND(MixerUnit, MixerUnit, AUTO)
-
-
-PB_BIND(Limits, Limits, AUTO)
-
-
-PB_BIND(Model, Model, AUTO)
-
-
 PB_BIND(Config, Config, AUTO)
-
-
-
-
-
-
-
-
 
 
 

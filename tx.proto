@@ -1,0 +1,90 @@
+syntax="proto2";
+
+enum HardwareType{
+    TRANSMITTER_INPUT_NOT_USED = 0;
+    ANALOG_WITH_CENTER_AUTO_RETURN = 1;
+    ANALOG_WITH_CENTER = 2;       
+    ANALOG_NO_CENTER = 3;        
+    ANALOG_NO_CENTER_POSITIVE_ONLY = 4;
+    ANALOG_MOMENTARY_ON_OFF = 5;
+    SWITCH_ON_OFF = 6;
+    SWITCH_ON_OPEN_OFF = 7;
+    MOMENTARY_ON_OFF = 8;
+}
+
+enum InputType {
+        LOGICAL_INPUT_NOT_USED = 0;
+        ANALOG = 1;
+        ANALOG_MOMENTARY = 2;
+        SWITCH = 3;
+        BCD_SWITCH = 4;
+        MOMENTARY = 5;
+        TRIM = 6;
+}
+
+enum InputSubType {
+    SUB_TYPE_NOT_APPLICABLE = 0;
+    UP_DOWN_BUTTONS = 1;
+    INCREMENT_AND_LOOP = 2;
+    DECREMENT_AND_LOOP = 3 ;
+    SAW_TOOTH  = 4;
+    DOUBLE_CLICK_DECREMENT = 5;
+}
+
+enum InputLabel {
+    NONE = 0;
+    ST = 1;
+    TH = 2;
+    THR = 3;
+    RUD = 4;
+    AIL = 5;
+    ELE = 6;
+    AUX = 7;
+    ST_DR = 8;
+    RUD_DR = 9;
+    AIL_DR = 10;
+    ELE_DR = 11;
+    TH_DR = 12;
+    THR_DR = 13;
+    TH_HOLD = 14;
+    GEAR = 15;
+    FLAPS = 16;
+    TRAINER = 17;
+    SIDE_L = 18;
+    SIDE_R = 19;
+    POT1 = 20;
+    POT2 = 21;
+    POT3 = 22;
+    POT4 = 23;
+    POT5 = 24;
+    POT6 = 25;
+    POT7 = 26;
+    POT8 = 27;
+    POT9 = 28;
+    SW1 = 29;
+    SW2 = 30;
+    SW3 = 31;
+    SW4 = 32;
+    SW5 = 33;
+    SW6 = 34;
+    SW7 = 35;
+    SW8 = 36;
+    SW9 = 37;
+}
+
+message ControllerInput{
+    required HardwareType hardwareType = 1;
+    required InputType inputType = 2;
+    required InputSubType inputSubType = 3;
+    required uint32 port = 4;
+    repeated uint32 calibration = 5;
+    repeated InputLabel input_labels = 6;
+}
+
+message TX{
+    repeated uint32 uuid = 1;
+    required string name = 2;
+    repeated ControllerInput controllerInputs = 3;
+    required int32 trimRange = 4;
+    required int32 trimStepSize = 5;
+}

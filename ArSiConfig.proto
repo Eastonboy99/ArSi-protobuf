@@ -1,0 +1,16 @@
+syntax="proto2";
+
+import "config.proto";
+
+enum Commands {
+    REQUEST = 0;
+    REPLAY_WITH_CONFIG = 1;
+    RECEIVED_VALID_CONFIG = 2;
+
+}
+
+message Packet {
+    required Commands type = 1;
+    optional Config config = 2;
+    
+}
