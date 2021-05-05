@@ -48,8 +48,8 @@ extern const pb_msgdesc_t Config_msg;
 #define Config_fields &Config_msg
 
 /* Maximum encoded size of messages (where known) */
-#if defined(TX_size) && defined(Model_size)
-#define Config_size                              (18 + TX_size + Model_size)
+#if defined(Model_size)
+#define Config_size                              (816 + Model_size)
 #endif
 
 #ifdef __cplusplus

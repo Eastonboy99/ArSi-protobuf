@@ -238,10 +238,12 @@ typedef struct _MixerUnit {
 } MixerUnit;
 
 typedef struct _Model { 
-    pb_callback_t uuid; 
-    pb_callback_t name; 
-    pb_callback_t mixerUnits; 
-    pb_callback_t limits; 
+    uint32_t uuid[8]; 
+    char name[16]; 
+    pb_size_t mixerUnits_count;
+    MixerUnit mixerUnits[100]; 
+    pb_size_t limits_count;
+    Limits limits[5]; 
     RFProtocolType rfProtocolType; 
 } Model;
 
@@ -271,10 +273,10 @@ extern "C" {
 /* Initializer values for message structs */
 #define MixerUnit_init_default                   {_SRCLabel_MIN, _ChannelLabel_MIN, 0, 0, 0, false, false, false, OperationType_OP_REPLACE}
 #define Limits_init_default                      {0, 0, 0, 0, 0, 0, false, 0u, false, false}
-#define Model_init_default                       {{{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, _RFProtocolType_MIN}
+#define Model_init_default                       {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default, MixerUnit_init_default}, 0, {Limits_init_default, Limits_init_default, Limits_init_default, Limits_init_default, Limits_init_default}, _RFProtocolType_MIN}
 #define MixerUnit_init_zero                      {_SRCLabel_MIN, _ChannelLabel_MIN, 0, 0, 0, false, 0, false, _OperationType_MIN}
 #define Limits_init_zero                         {0, 0, 0, 0, 0, 0, false, 0, false, 0}
-#define Model_init_zero                          {{{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, _RFProtocolType_MIN}
+#define Model_init_zero                          {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero}, 0, {Limits_init_zero, Limits_init_zero, Limits_init_zero, Limits_init_zero, Limits_init_zero}, _RFProtocolType_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define Limits_ep_l_tag                          1
@@ -323,12 +325,12 @@ X(a, STATIC,   OPTIONAL, BOOL,     invert,            8)
 #define Limits_DEFAULT (const pb_byte_t*)"\x38\x00\x40\x00\x00"
 
 #define Model_FIELDLIST(X, a) \
-X(a, CALLBACK, REPEATED, UINT32,   uuid,              1) \
-X(a, CALLBACK, REQUIRED, STRING,   name,              2) \
-X(a, CALLBACK, REPEATED, MESSAGE,  mixerUnits,        3) \
-X(a, CALLBACK, REPEATED, MESSAGE,  limits,            4) \
+X(a, STATIC,   FIXARRAY, UINT32,   uuid,              1) \
+X(a, STATIC,   REQUIRED, STRING,   name,              2) \
+X(a, STATIC,   REPEATED, MESSAGE,  mixerUnits,        3) \
+X(a, STATIC,   REPEATED, MESSAGE,  limits,            4) \
 X(a, STATIC,   REQUIRED, UENUM,    rfProtocolType,    5)
-#define Model_CALLBACK pb_default_field_callback
+#define Model_CALLBACK NULL
 #define Model_DEFAULT NULL
 #define Model_mixerUnits_MSGTYPE MixerUnit
 #define Model_limits_MSGTYPE Limits
@@ -343,9 +345,9 @@ extern const pb_msgdesc_t Model_msg;
 #define Model_fields &Model_msg
 
 /* Maximum encoded size of messages (where known) */
-/* Model_size depends on runtime parameters */
 #define Limits_size                              74
 #define MixerUnit_size                           32
+#define Model_size                               3847
 
 #ifdef __cplusplus
 } /* extern "C" */

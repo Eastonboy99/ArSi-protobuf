@@ -88,14 +88,16 @@ typedef struct _ControllerInput {
     InputType inputType; 
     InputSubType inputSubType; 
     uint32_t port; 
-    pb_callback_t calibration; 
-    pb_callback_t input_labels; 
+    uint32_t calibration[3]; 
+    pb_size_t input_labels_count;
+    InputLabel input_labels[5]; 
 } ControllerInput;
 
 typedef struct _TX { 
-    pb_callback_t uuid; 
-    pb_callback_t name; 
-    pb_callback_t controllerInputs; 
+    uint32_t uuid[8]; 
+    char name[16]; 
+    pb_size_t controllerInputs_count;
+    ControllerInput controllerInputs[17]; 
     int32_t trimRange; 
     int32_t trimStepSize; 
 } TX;
@@ -124,10 +126,10 @@ extern "C" {
 #endif
 
 /* Initializer values for message structs */
-#define ControllerInput_init_default             {_HardwareType_MIN, _InputType_MIN, _InputSubType_MIN, 0, {{NULL}, NULL}, {{NULL}, NULL}}
-#define TX_init_default                          {{{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, 0, 0}
-#define ControllerInput_init_zero                {_HardwareType_MIN, _InputType_MIN, _InputSubType_MIN, 0, {{NULL}, NULL}, {{NULL}, NULL}}
-#define TX_init_zero                             {{{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, 0, 0}
+#define ControllerInput_init_default             {_HardwareType_MIN, _InputType_MIN, _InputSubType_MIN, 0, {0, 0, 0}, 0, {_InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN}}
+#define TX_init_default                          {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default}, 0, 0}
+#define ControllerInput_init_zero                {_HardwareType_MIN, _InputType_MIN, _InputSubType_MIN, 0, {0, 0, 0}, 0, {_InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN}}
+#define TX_init_zero                             {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero}, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define ControllerInput_hardwareType_tag         1
@@ -148,18 +150,18 @@ X(a, STATIC,   REQUIRED, UENUM,    hardwareType,      1) \
 X(a, STATIC,   REQUIRED, UENUM,    inputType,         2) \
 X(a, STATIC,   REQUIRED, UENUM,    inputSubType,      3) \
 X(a, STATIC,   REQUIRED, UINT32,   port,              4) \
-X(a, CALLBACK, REPEATED, UINT32,   calibration,       5) \
-X(a, CALLBACK, REPEATED, UENUM,    input_labels,      6)
-#define ControllerInput_CALLBACK pb_default_field_callback
+X(a, STATIC,   FIXARRAY, UINT32,   calibration,       5) \
+X(a, STATIC,   REPEATED, UENUM,    input_labels,      6)
+#define ControllerInput_CALLBACK NULL
 #define ControllerInput_DEFAULT NULL
 
 #define TX_FIELDLIST(X, a) \
-X(a, CALLBACK, REPEATED, UINT32,   uuid,              1) \
-X(a, CALLBACK, REQUIRED, STRING,   name,              2) \
-X(a, CALLBACK, REPEATED, MESSAGE,  controllerInputs,   3) \
+X(a, STATIC,   FIXARRAY, UINT32,   uuid,              1) \
+X(a, STATIC,   REQUIRED, STRING,   name,              2) \
+X(a, STATIC,   REPEATED, MESSAGE,  controllerInputs,   3) \
 X(a, STATIC,   REQUIRED, INT32,    trimRange,         4) \
 X(a, STATIC,   REQUIRED, INT32,    trimStepSize,      5)
-#define TX_CALLBACK pb_default_field_callback
+#define TX_CALLBACK NULL
 #define TX_DEFAULT NULL
 #define TX_controllerInputs_MSGTYPE ControllerInput
 
@@ -171,8 +173,8 @@ extern const pb_msgdesc_t TX_msg;
 #define TX_fields &TX_msg
 
 /* Maximum encoded size of messages (where known) */
-/* ControllerInput_size depends on runtime parameters */
-/* TX_size depends on runtime parameters */
+#define ControllerInput_size                     40
+#define TX_size                                  801
 
 #ifdef __cplusplus
 } /* extern "C" */

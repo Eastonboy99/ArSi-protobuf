@@ -9,7 +9,7 @@
 PB_BIND(ControllerInput, ControllerInput, AUTO)
 
 
-PB_BIND(TX, TX, AUTO)
+PB_BIND(TX, TX, 2)
 
 
 
