@@ -13,7 +13,7 @@
 /* Enum definitions */
 typedef enum _Commands { 
     Commands_REQUEST = 0, 
-    Commands_REPLAY_WITH_CONFIG = 1, 
+    Commands_REPLY_WITH_CONFIG = 1, 
     Commands_RECEIVED_VALID_CONFIG = 2 
 } Commands;
 

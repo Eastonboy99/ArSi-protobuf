@@ -7,7 +7,7 @@ export const protobufPackage = "";
 
 export enum Commands {
   REQUEST = 0,
-  REPLAY_WITH_CONFIG = 1,
+  REPLY_WITH_CONFIG = 1,
   RECEIVED_VALID_CONFIG = 2,
   UNRECOGNIZED = -1,
 }
@@ -18,8 +18,8 @@ export function commandsFromJSON(object: any): Commands {
     case "REQUEST":
       return Commands.REQUEST;
     case 1:
-    case "REPLAY_WITH_CONFIG":
-      return Commands.REPLAY_WITH_CONFIG;
+    case "REPLY_WITH_CONFIG":
+      return Commands.REPLY_WITH_CONFIG;
     case 2:
     case "RECEIVED_VALID_CONFIG":
       return Commands.RECEIVED_VALID_CONFIG;
@@ -34,8 +34,8 @@ export function commandsToJSON(object: Commands): string {
   switch (object) {
     case Commands.REQUEST:
       return "REQUEST";
-    case Commands.REPLAY_WITH_CONFIG:
-      return "REPLAY_WITH_CONFIG";
+    case Commands.REPLY_WITH_CONFIG:
+      return "REPLY_WITH_CONFIG";
     case Commands.RECEIVED_VALID_CONFIG:
       return "RECEIVED_VALID_CONFIG";
     default:
