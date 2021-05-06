@@ -213,11 +213,11 @@ typedef enum _RFProtocolType {
 
 /* Struct definitions */
 typedef struct _Limits { 
-    int32_t ep_l; 
-    int32_t ep_h; 
+    int32_t epL; 
+    int32_t epH; 
     int32_t subtrim; 
-    int32_t limit_l; 
-    int32_t limit_h; 
+    int32_t limitL; 
+    int32_t limitH; 
     int32_t failsafe; 
     bool has_speed;
     uint32_t speed; 
@@ -279,11 +279,11 @@ extern "C" {
 #define Model_init_zero                          {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero, MixerUnit_init_zero}, 0, {Limits_init_zero, Limits_init_zero, Limits_init_zero, Limits_init_zero, Limits_init_zero}, _RFProtocolType_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define Limits_ep_l_tag                          1
-#define Limits_ep_h_tag                          2
+#define Limits_epL_tag                           1
+#define Limits_epH_tag                           2
 #define Limits_subtrim_tag                       3
-#define Limits_limit_l_tag                       4
-#define Limits_limit_h_tag                       5
+#define Limits_limitL_tag                        4
+#define Limits_limitH_tag                        5
 #define Limits_failsafe_tag                      6
 #define Limits_speed_tag                         7
 #define Limits_invert_tag                        8
@@ -313,11 +313,11 @@ X(a, STATIC,   OPTIONAL, UENUM,    op,                7)
 #define MixerUnit_DEFAULT (const pb_byte_t*)"\x30\x00\x00"
 
 #define Limits_FIELDLIST(X, a) \
-X(a, STATIC,   REQUIRED, INT32,    ep_l,              1) \
-X(a, STATIC,   REQUIRED, INT32,    ep_h,              2) \
+X(a, STATIC,   REQUIRED, INT32,    epL,               1) \
+X(a, STATIC,   REQUIRED, INT32,    epH,               2) \
 X(a, STATIC,   REQUIRED, INT32,    subtrim,           3) \
-X(a, STATIC,   REQUIRED, INT32,    limit_l,           4) \
-X(a, STATIC,   REQUIRED, INT32,    limit_h,           5) \
+X(a, STATIC,   REQUIRED, INT32,    limitL,            4) \
+X(a, STATIC,   REQUIRED, INT32,    limitH,            5) \
 X(a, STATIC,   REQUIRED, INT32,    failsafe,          6) \
 X(a, STATIC,   OPTIONAL, UINT32,   speed,             7) \
 X(a, STATIC,   OPTIONAL, BOOL,     invert,            8)

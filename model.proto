@@ -214,11 +214,11 @@ message MixerUnit {
 }
 
 message Limits {
-    required int32 ep_l = 1;
-    required int32 ep_h = 2;
+    required int32 epL = 1;
+    required int32 epH = 2;
     required int32 subtrim = 3;
-    required int32 limit_l = 4;
-    required int32 limit_h = 5;
+    required int32 limitL = 4;
+    required int32 limitH = 5;
     required int32 failsafe = 6;
     optional uint32 speed = 7 [default = 0];
     optional bool invert = 8 [default = false];
