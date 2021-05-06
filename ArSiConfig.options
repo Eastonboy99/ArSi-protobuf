@@ -1,0 +1,14 @@
+Packet.Config.TX.ControllerInput.calibration max_count:3
+Packet.Config.TX.ControllerInput.calibration fixed_count:true
+Packet.Config.TX.ControllerInput.labels max_count:5
+
+Packet.Config.TX.uuid max_count:8
+Packet.Config.TX.uuid fixed_count:true
+Packet.Config.TX.name max_size:16
+Packet.Config.TX.controllerInputs max_count:17
+
+Packet.Config.Model.uuid max_count:8
+Packet.Config.Model.uuid fixed_count:true
+Packet.Config.Model.name max_size:16
+Packet.Config.Model.mixerUnits max_count:100
+Packet.Config.Model.limits max_count:5
