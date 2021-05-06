@@ -230,21 +230,21 @@ typedef struct _MixerUnit {
     ChannelLabel dst; 
     int32_t scalar; 
     int32_t offset; 
-    bool applyTrim; 
-    bool has_invertSource;
-    bool invertSource; 
-    bool has_operationType;
-    OperationType operationType; 
+    bool apply_trim; 
+    bool has_invert_source;
+    bool invert_source; 
+    bool has_op;
+    OperationType op; 
 } MixerUnit;
 
 typedef struct _Model { 
     uint32_t uuid[8]; 
     char name[16]; 
-    pb_size_t mixerUnits_count;
-    MixerUnit mixerUnits[100]; 
+    pb_size_t mixer_units_count;
+    MixerUnit mixer_units[100]; 
     pb_size_t limits_count;
     Limits limits[5]; 
-    RFProtocolType rfProtocolType; 
+    RFProtocolType rf_protocol_type; 
 } Model;
 
 
@@ -291,14 +291,14 @@ extern "C" {
 #define MixerUnit_dst_tag                        2
 #define MixerUnit_scalar_tag                     3
 #define MixerUnit_offset_tag                     4
-#define MixerUnit_applyTrim_tag                  5
-#define MixerUnit_invertSource_tag               6
-#define MixerUnit_operationType_tag              7
+#define MixerUnit_apply_trim_tag                 5
+#define MixerUnit_invert_source_tag              6
+#define MixerUnit_op_tag                         7
 #define Model_uuid_tag                           1
 #define Model_name_tag                           2
-#define Model_mixerUnits_tag                     3
+#define Model_mixer_units_tag                    3
 #define Model_limits_tag                         4
-#define Model_rfProtocolType_tag                 5
+#define Model_rf_protocol_type_tag               5
 
 /* Struct field encoding specification for nanopb */
 #define MixerUnit_FIELDLIST(X, a) \
@@ -306,9 +306,9 @@ X(a, STATIC,   REQUIRED, UENUM,    src,               1) \
 X(a, STATIC,   REQUIRED, UENUM,    dst,               2) \
 X(a, STATIC,   REQUIRED, INT32,    scalar,            3) \
 X(a, STATIC,   REQUIRED, INT32,    offset,            4) \
-X(a, STATIC,   REQUIRED, BOOL,     applyTrim,         5) \
-X(a, STATIC,   OPTIONAL, BOOL,     invertSource,      6) \
-X(a, STATIC,   OPTIONAL, UENUM,    operationType,     7)
+X(a, STATIC,   REQUIRED, BOOL,     apply_trim,        5) \
+X(a, STATIC,   OPTIONAL, BOOL,     invert_source,     6) \
+X(a, STATIC,   OPTIONAL, UENUM,    op,                7)
 #define MixerUnit_CALLBACK NULL
 #define MixerUnit_DEFAULT (const pb_byte_t*)"\x30\x00\x00"
 
@@ -327,12 +327,12 @@ X(a, STATIC,   OPTIONAL, BOOL,     invert,            8)
 #define Model_FIELDLIST(X, a) \
 X(a, STATIC,   FIXARRAY, UINT32,   uuid,              1) \
 X(a, STATIC,   REQUIRED, STRING,   name,              2) \
-X(a, STATIC,   REPEATED, MESSAGE,  mixerUnits,        3) \
+X(a, STATIC,   REPEATED, MESSAGE,  mixer_units,       3) \
 X(a, STATIC,   REPEATED, MESSAGE,  limits,            4) \
-X(a, STATIC,   REQUIRED, UENUM,    rfProtocolType,    5)
+X(a, STATIC,   REQUIRED, UENUM,    rf_protocol_type,   5)
 #define Model_CALLBACK NULL
 #define Model_DEFAULT NULL
-#define Model_mixerUnits_MSGTYPE MixerUnit
+#define Model_mixer_units_MSGTYPE MixerUnit
 #define Model_limits_MSGTYPE Limits
 
 extern const pb_msgdesc_t MixerUnit_msg;

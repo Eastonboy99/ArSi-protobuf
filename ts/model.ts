@@ -1190,7 +1190,7 @@ export interface MixerUnit {
   offset: number;
   applyTrim: boolean;
   invertSource: boolean;
-  operationType: OperationType;
+  op: OperationType;
 }
 
 export interface Limits {
@@ -1219,7 +1219,7 @@ const baseMixerUnit: object = {
   offset: 0,
   applyTrim: false,
   invertSource: false,
-  operationType: 0,
+  op: 0,
 };
 
 export const MixerUnit = {
@@ -1245,8 +1245,8 @@ export const MixerUnit = {
     if (message.invertSource === true) {
       writer.uint32(48).bool(message.invertSource);
     }
-    if (message.operationType !== 0) {
-      writer.uint32(56).int32(message.operationType);
+    if (message.op !== 0) {
+      writer.uint32(56).int32(message.op);
     }
     return writer;
   },
@@ -1277,7 +1277,7 @@ export const MixerUnit = {
           message.invertSource = reader.bool();
           break;
         case 7:
-          message.operationType = reader.int32() as any;
+          message.op = reader.int32() as any;
           break;
         default:
           reader.skipType(tag & 7);
@@ -1319,10 +1319,10 @@ export const MixerUnit = {
     } else {
       message.invertSource = false;
     }
-    if (object.operationType !== undefined && object.operationType !== null) {
-      message.operationType = operationTypeFromJSON(object.operationType);
+    if (object.op !== undefined && object.op !== null) {
+      message.op = operationTypeFromJSON(object.op);
     } else {
-      message.operationType = 0;
+      message.op = 0;
     }
     return message;
   },
@@ -1336,8 +1336,7 @@ export const MixerUnit = {
     message.applyTrim !== undefined && (obj.applyTrim = message.applyTrim);
     message.invertSource !== undefined &&
       (obj.invertSource = message.invertSource);
-    message.operationType !== undefined &&
-      (obj.operationType = operationTypeToJSON(message.operationType));
+    message.op !== undefined && (obj.op = operationTypeToJSON(message.op));
     return obj;
   },
 
@@ -1373,10 +1372,10 @@ export const MixerUnit = {
     } else {
       message.invertSource = false;
     }
-    if (object.operationType !== undefined && object.operationType !== null) {
-      message.operationType = object.operationType;
+    if (object.op !== undefined && object.op !== null) {
+      message.op = object.op;
     } else {
-      message.operationType = 0;
+      message.op = 0;
     }
     return message;
   },

@@ -208,9 +208,9 @@ message MixerUnit {
     required ChannelLabel dst = 2;
     required int32 scalar = 3;
     required int32 offset = 4;
-    required bool applyTrim = 5;
-    optional bool invertSource = 6 [default = false];
-    optional OperationType operationType = 7 [default = OP_REPLACE];
+    required bool apply_trim = 5;
+    optional bool invert_source = 6 [default = false];
+    optional OperationType op = 7 [default = OP_REPLACE];
 }
 
 message Limits {
@@ -233,7 +233,7 @@ enum RFProtocolType
 message Model {
     repeated uint32 uuid = 1;
     required string name = 2;
-    repeated MixerUnit mixerUnits = 3;
+    repeated MixerUnit mixer_units = 3;
     repeated Limits limits = 4;
-    required RFProtocolType rfProtocolType = 5;
+    required RFProtocolType rf_protocol_type = 5;
 }

@@ -48,9 +48,7 @@ extern const pb_msgdesc_t Config_msg;
 #define Config_fields &Config_msg
 
 /* Maximum encoded size of messages (where known) */
-#if defined(Model_size)
-#define Config_size                              (816 + Model_size)
-#endif
+#define Config_size                              4660
 
 #ifdef __cplusplus
 } /* extern "C" */

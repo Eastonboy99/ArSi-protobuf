@@ -450,7 +450,7 @@ export interface ControllerInput {
   inputSubType: InputSubType;
   port: number;
   calibration: number[];
-  inputLabels: InputLabel[];
+  labels: InputLabel[];
 }
 
 export interface TX {
@@ -467,7 +467,7 @@ const baseControllerInput: object = {
   inputSubType: 0,
   port: 0,
   calibration: 0,
-  inputLabels: 0,
+  labels: 0,
 };
 
 export const ControllerInput = {
@@ -493,7 +493,7 @@ export const ControllerInput = {
     }
     writer.ldelim();
     writer.uint32(50).fork();
-    for (const v of message.inputLabels) {
+    for (const v of message.labels) {
       writer.int32(v);
     }
     writer.ldelim();
@@ -505,7 +505,7 @@ export const ControllerInput = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseControllerInput } as ControllerInput;
     message.calibration = [];
-    message.inputLabels = [];
+    message.labels = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -535,10 +535,10 @@ export const ControllerInput = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.inputLabels.push(reader.int32() as any);
+              message.labels.push(reader.int32() as any);
             }
           } else {
-            message.inputLabels.push(reader.int32() as any);
+            message.labels.push(reader.int32() as any);
           }
           break;
         default:
@@ -552,7 +552,7 @@ export const ControllerInput = {
   fromJSON(object: any): ControllerInput {
     const message = { ...baseControllerInput } as ControllerInput;
     message.calibration = [];
-    message.inputLabels = [];
+    message.labels = [];
     if (object.hardwareType !== undefined && object.hardwareType !== null) {
       message.hardwareType = hardwareTypeFromJSON(object.hardwareType);
     } else {
@@ -578,9 +578,9 @@ export const ControllerInput = {
         message.calibration.push(Number(e));
       }
     }
-    if (object.inputLabels !== undefined && object.inputLabels !== null) {
-      for (const e of object.inputLabels) {
-        message.inputLabels.push(inputLabelFromJSON(e));
+    if (object.labels !== undefined && object.labels !== null) {
+      for (const e of object.labels) {
+        message.labels.push(inputLabelFromJSON(e));
       }
     }
     return message;
@@ -600,10 +600,10 @@ export const ControllerInput = {
     } else {
       obj.calibration = [];
     }
-    if (message.inputLabels) {
-      obj.inputLabels = message.inputLabels.map((e) => inputLabelToJSON(e));
+    if (message.labels) {
+      obj.labels = message.labels.map((e) => inputLabelToJSON(e));
     } else {
-      obj.inputLabels = [];
+      obj.labels = [];
     }
     return obj;
   },
@@ -611,7 +611,7 @@ export const ControllerInput = {
   fromPartial(object: DeepPartial<ControllerInput>): ControllerInput {
     const message = { ...baseControllerInput } as ControllerInput;
     message.calibration = [];
-    message.inputLabels = [];
+    message.labels = [];
     if (object.hardwareType !== undefined && object.hardwareType !== null) {
       message.hardwareType = object.hardwareType;
     } else {
@@ -637,9 +637,9 @@ export const ControllerInput = {
         message.calibration.push(e);
       }
     }
-    if (object.inputLabels !== undefined && object.inputLabels !== null) {
-      for (const e of object.inputLabels) {
-        message.inputLabels.push(e);
+    if (object.labels !== undefined && object.labels !== null) {
+      for (const e of object.labels) {
+        message.labels.push(e);
       }
     }
     return message;

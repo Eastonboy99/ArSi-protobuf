@@ -57,9 +57,7 @@ extern const pb_msgdesc_t Packet_msg;
 #define Packet_fields &Packet_msg
 
 /* Maximum encoded size of messages (where known) */
-#if defined(Config_size)
-#define Packet_size                              (8 + Config_size)
-#endif
+#define Packet_size                              4665
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -1,8 +1,8 @@
 ControllerInput.calibration max_count:3
 ControllerInput.calibration fixed_count:true
-ControllerInput.input_labels max_count:5
+ControllerInput.labels max_count:5
 
 TX.uuid max_count:8
 TX.uuid fixed_count:true
 TX.name max_size:16
-TX.controllerInputs max_count:17
+TX.controller_inputs max_count:17
