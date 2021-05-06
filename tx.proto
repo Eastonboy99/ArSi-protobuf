@@ -73,9 +73,9 @@ enum InputLabel {
 }
 
 message ControllerInput{
-    required HardwareType hardware_type = 1;
-    required InputType input_type = 2;
-    optional InputSubType input_sub_type = 3;
+    required HardwareType hardwareType = 1;
+    required InputType inputType = 2;
+    required InputSubType inputSubType = 3;
     required uint32 port = 4;
     repeated uint32 calibration = 5;
     repeated InputLabel labels = 6;
@@ -84,7 +84,7 @@ message ControllerInput{
 message TX{
     repeated uint32 uuid = 1;
     required string name = 2;
-    repeated ControllerInput controller_inputs = 3;
-    required int32 trim_range = 4;
-    required int32 trim_step_size = 5;
+    repeated ControllerInput controllerInputs = 3;
+    required int32 trimRange = 4;
+    required int32 trimStepSize = 5;
 }

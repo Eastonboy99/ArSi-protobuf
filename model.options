@@ -1,5 +1,5 @@
 Model.uuid max_count:8
 Model.uuid fixed_count:true
 Model.name max_size:16
-Model.mixer_units max_count:100
+Model.mixerUnits max_count:100
 Model.limits max_count:5

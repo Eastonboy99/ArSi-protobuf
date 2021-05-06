@@ -5,4 +5,4 @@ ControllerInput.labels max_count:5
 TX.uuid max_count:8
 TX.uuid fixed_count:true
 TX.name max_size:16
-TX.controller_inputs max_count:17
+TX.controllerInputs max_count:17

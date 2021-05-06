@@ -84,21 +84,22 @@ typedef enum _InputLabel {
 
 /* Struct definitions */
 typedef struct _ControllerInput { 
-    HardwareType hardware_type; 
-    InputType input_type; 
-    bool has_input_sub_type;
-    InputSubType input_sub_type; 
+    HardwareType hardwareType; 
+    InputType inputType; 
+    InputSubType inputSubType; 
     uint32_t port; 
-    pb_callback_t calibration; 
-    pb_callback_t labels; 
+    uint32_t calibration[3]; 
+    pb_size_t labels_count;
+    InputLabel labels[5]; 
 } ControllerInput;
 
 typedef struct _TX { 
-    pb_callback_t uuid; 
-    pb_callback_t name; 
-    pb_callback_t controller_inputs; 
-    int32_t trim_range; 
-    int32_t trim_step_size; 
+    uint32_t uuid[8]; 
+    char name[16]; 
+    pb_size_t controllerInputs_count;
+    ControllerInput controllerInputs[17]; 
+    int32_t trimRange; 
+    int32_t trimStepSize; 
 } TX;
 
 
@@ -125,44 +126,44 @@ extern "C" {
 #endif
 
 /* Initializer values for message structs */
-#define ControllerInput_init_default             {_HardwareType_MIN, _InputType_MIN, false, _InputSubType_MIN, 0, {{NULL}, NULL}, {{NULL}, NULL}}
-#define TX_init_default                          {{{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, 0, 0}
-#define ControllerInput_init_zero                {_HardwareType_MIN, _InputType_MIN, false, _InputSubType_MIN, 0, {{NULL}, NULL}, {{NULL}, NULL}}
-#define TX_init_zero                             {{{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, 0, 0}
+#define ControllerInput_init_default             {_HardwareType_MIN, _InputType_MIN, _InputSubType_MIN, 0, {0, 0, 0}, 0, {_InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN}}
+#define TX_init_default                          {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default, ControllerInput_init_default}, 0, 0}
+#define ControllerInput_init_zero                {_HardwareType_MIN, _InputType_MIN, _InputSubType_MIN, 0, {0, 0, 0}, 0, {_InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN, _InputLabel_MIN}}
+#define TX_init_zero                             {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero, ControllerInput_init_zero}, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define ControllerInput_hardware_type_tag        1
-#define ControllerInput_input_type_tag           2
-#define ControllerInput_input_sub_type_tag       3
+#define ControllerInput_hardwareType_tag         1
+#define ControllerInput_inputType_tag            2
+#define ControllerInput_inputSubType_tag         3
 #define ControllerInput_port_tag                 4
 #define ControllerInput_calibration_tag          5
 #define ControllerInput_labels_tag               6
 #define TX_uuid_tag                              1
 #define TX_name_tag                              2
-#define TX_controller_inputs_tag                 3
-#define TX_trim_range_tag                        4
-#define TX_trim_step_size_tag                    5
+#define TX_controllerInputs_tag                  3
+#define TX_trimRange_tag                         4
+#define TX_trimStepSize_tag                      5
 
 /* Struct field encoding specification for nanopb */
 #define ControllerInput_FIELDLIST(X, a) \
-X(a, STATIC,   REQUIRED, UENUM,    hardware_type,     1) \
-X(a, STATIC,   REQUIRED, UENUM,    input_type,        2) \
-X(a, STATIC,   OPTIONAL, UENUM,    input_sub_type,    3) \
+X(a, STATIC,   REQUIRED, UENUM,    hardwareType,      1) \
+X(a, STATIC,   REQUIRED, UENUM,    inputType,         2) \
+X(a, STATIC,   REQUIRED, UENUM,    inputSubType,      3) \
 X(a, STATIC,   REQUIRED, UINT32,   port,              4) \
-X(a, CALLBACK, REPEATED, UINT32,   calibration,       5) \
-X(a, CALLBACK, REPEATED, UENUM,    labels,            6)
-#define ControllerInput_CALLBACK pb_default_field_callback
+X(a, STATIC,   FIXARRAY, UINT32,   calibration,       5) \
+X(a, STATIC,   REPEATED, UENUM,    labels,            6)
+#define ControllerInput_CALLBACK NULL
 #define ControllerInput_DEFAULT NULL
 
 #define TX_FIELDLIST(X, a) \
-X(a, CALLBACK, REPEATED, UINT32,   uuid,              1) \
-X(a, CALLBACK, REQUIRED, STRING,   name,              2) \
-X(a, CALLBACK, REPEATED, MESSAGE,  controller_inputs,   3) \
-X(a, STATIC,   REQUIRED, INT32,    trim_range,        4) \
-X(a, STATIC,   REQUIRED, INT32,    trim_step_size,    5)
-#define TX_CALLBACK pb_default_field_callback
+X(a, STATIC,   FIXARRAY, UINT32,   uuid,              1) \
+X(a, STATIC,   REQUIRED, STRING,   name,              2) \
+X(a, STATIC,   REPEATED, MESSAGE,  controllerInputs,   3) \
+X(a, STATIC,   REQUIRED, INT32,    trimRange,         4) \
+X(a, STATIC,   REQUIRED, INT32,    trimStepSize,      5)
+#define TX_CALLBACK NULL
 #define TX_DEFAULT NULL
-#define TX_controller_inputs_MSGTYPE ControllerInput
+#define TX_controllerInputs_MSGTYPE ControllerInput
 
 extern const pb_msgdesc_t ControllerInput_msg;
 extern const pb_msgdesc_t TX_msg;
@@ -172,8 +173,8 @@ extern const pb_msgdesc_t TX_msg;
 #define TX_fields &TX_msg
 
 /* Maximum encoded size of messages (where known) */
-/* ControllerInput_size depends on runtime parameters */
-/* TX_size depends on runtime parameters */
+#define ControllerInput_size                     40
+#define TX_size                                  801
 
 #ifdef __cplusplus
 } /* extern "C" */
