@@ -2692,22 +2692,22 @@ export const Packet_Config_Model_Limits = {
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.epL !== 0) {
-      writer.uint32(8).int32(message.epL);
+      writer.uint32(8).sint32(message.epL);
     }
     if (message.epH !== 0) {
-      writer.uint32(16).int32(message.epH);
+      writer.uint32(16).sint32(message.epH);
     }
     if (message.subtrim !== 0) {
-      writer.uint32(24).int32(message.subtrim);
+      writer.uint32(24).sint32(message.subtrim);
     }
     if (message.limitL !== 0) {
-      writer.uint32(32).int32(message.limitL);
+      writer.uint32(32).sint32(message.limitL);
     }
     if (message.limitH !== 0) {
-      writer.uint32(40).int32(message.limitH);
+      writer.uint32(40).sint32(message.limitH);
     }
     if (message.failsafe !== 0) {
-      writer.uint32(48).int32(message.failsafe);
+      writer.uint32(48).sint32(message.failsafe);
     }
     if (message.speed !== 0) {
       writer.uint32(56).uint32(message.speed);
@@ -2731,22 +2731,22 @@ export const Packet_Config_Model_Limits = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.epL = reader.int32();
+          message.epL = reader.sint32();
           break;
         case 2:
-          message.epH = reader.int32();
+          message.epH = reader.sint32();
           break;
         case 3:
-          message.subtrim = reader.int32();
+          message.subtrim = reader.sint32();
           break;
         case 4:
-          message.limitL = reader.int32();
+          message.limitL = reader.sint32();
           break;
         case 5:
-          message.limitH = reader.int32();
+          message.limitH = reader.sint32();
           break;
         case 6:
-          message.failsafe = reader.int32();
+          message.failsafe = reader.sint32();
           break;
         case 7:
           message.speed = reader.uint32();

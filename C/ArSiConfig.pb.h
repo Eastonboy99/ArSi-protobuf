@@ -506,12 +506,12 @@ X(a, STATIC,   OPTIONAL, UENUM,    op,                7)
 #define Packet_Config_Model_MixerUnit_DEFAULT (const pb_byte_t*)"\x30\x00\x00"
 
 #define Packet_Config_Model_Limits_FIELDLIST(X, a) \
-X(a, STATIC,   REQUIRED, INT32,    epL,               1) \
-X(a, STATIC,   REQUIRED, INT32,    epH,               2) \
-X(a, STATIC,   REQUIRED, INT32,    subtrim,           3) \
-X(a, STATIC,   REQUIRED, INT32,    limitL,            4) \
-X(a, STATIC,   REQUIRED, INT32,    limitH,            5) \
-X(a, STATIC,   REQUIRED, INT32,    failsafe,          6) \
+X(a, STATIC,   REQUIRED, SINT32,   epL,               1) \
+X(a, STATIC,   REQUIRED, SINT32,   epH,               2) \
+X(a, STATIC,   REQUIRED, SINT32,   subtrim,           3) \
+X(a, STATIC,   REQUIRED, SINT32,   limitL,            4) \
+X(a, STATIC,   REQUIRED, SINT32,   limitH,            5) \
+X(a, STATIC,   REQUIRED, SINT32,   failsafe,          6) \
 X(a, STATIC,   OPTIONAL, UINT32,   speed,             7) \
 X(a, STATIC,   OPTIONAL, BOOL,     invert,            8)
 #define Packet_Config_Model_Limits_CALLBACK NULL
@@ -535,13 +535,13 @@ extern const pb_msgdesc_t Packet_Config_Model_Limits_msg;
 #define Packet_Config_Model_Limits_fields &Packet_Config_Model_Limits_msg
 
 /* Maximum encoded size of messages (where known) */
-#define Packet_Config_Model_Limits_size          74
+#define Packet_Config_Model_Limits_size          44
 #define Packet_Config_Model_MixerUnit_size       32
-#define Packet_Config_Model_size                 3847
+#define Packet_Config_Model_size                 3697
 #define Packet_Config_TX_ControllerInput_size    40
 #define Packet_Config_TX_size                    801
-#define Packet_Config_size                       4660
-#define Packet_size                              4665
+#define Packet_Config_size                       4510
+#define Packet_size                              4515
 
 #ifdef __cplusplus
 } /* extern "C" */
