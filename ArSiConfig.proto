@@ -38,7 +38,7 @@ message Packet {
                     MOMENTARY = 5;
                     TRIM = 6;
             }
-                required InputSubType inputSubType = 3;
+                optional InputSubType inputSubType = 3;
                 enum InputSubType {
                     SUB_TYPE_NOT_APPLICABLE = 0;
                     UP_DOWN_BUTTONS = 1;
