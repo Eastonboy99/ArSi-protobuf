@@ -6,7 +6,7 @@ export const protobufPackage = "";
 
 export interface Packet {
   type: Packet_Commands;
-  config: Packet_Config | undefined;
+  config?: Packet_Config;
 }
 
 export enum Packet_Commands {
@@ -49,8 +49,8 @@ export function packet_CommandsToJSON(object: Packet_Commands): string {
 
 export interface Packet_Config {
   version: number;
-  tx: Packet_Config_TX | undefined;
-  model: Packet_Config_Model | undefined;
+  tx?: Packet_Config_TX;
+  model?: Packet_Config_Model;
 }
 
 export interface Packet_Config_TX {
