@@ -1,22 +1,22 @@
-syntax="proto2";
+syntax="proto3";
 
 message Packet {
-    required Commands type = 1;
+    Commands type = 1;
     enum Commands {
         REQUEST = 0;
         REPLY_WITH_CONFIG = 1;
         RECEIVED_VALID_CONFIG = 2;
     }
-    optional Config config = 2;
+    Config config = 2;
     message Config {
-        required uint32 version = 1;
-        required TX tx = 2;
+        uint32 version = 1;
+        TX tx = 2;
         message TX{
             repeated uint32 uuid = 1;
-            required string name = 2;
+            string name = 2;
             repeated ControllerInput controllerInputs = 3;
             message ControllerInput{
-                required HardwareType hardwareType = 1;
+                HardwareType hardwareType = 1;
                 enum HardwareType{
                     TRANSMITTER_INPUT_NOT_USED = 0;
                     ANALOG_WITH_CENTER_AUTO_RETURN = 1;
@@ -28,7 +28,7 @@ message Packet {
                     SWITCH_ON_OPEN_OFF = 7;
                     MOMENTARY_ON_OFF = 8;
                 }
-                required InputType inputType = 2;
+                InputType inputType = 2;
                 enum InputType {
                     LOGICAL_INPUT_NOT_USED = 0;
                     ANALOG = 1;
@@ -38,7 +38,7 @@ message Packet {
                     MOMENTARY = 5;
                     TRIM = 6;
             }
-                optional InputSubType inputSubType = 3;
+                InputSubType inputSubType = 3;
                 enum InputSubType {
                     SUB_TYPE_NOT_APPLICABLE = 0;
                     UP_DOWN_BUTTONS = 1;
@@ -47,7 +47,7 @@ message Packet {
                     SAW_TOOTH  = 4;
                     DOUBLE_CLICK_DECREMENT = 5;
                 }
-                required uint32 port = 4;
+                uint32 port = 4;
                 repeated uint32 calibration = 5;
                 repeated InputLabel labels = 6;
                 enum InputLabel {
@@ -91,16 +91,16 @@ message Packet {
                     SW9 = 37;
                 }
             }
-            required int32 trimRange = 4;
-            required int32 trimStepSize = 5;
+            int32 trimRange = 4;
+            int32 trimStepSize = 5;
         }
-        required Model model = 3;
+        Model model = 3;
         message Model {
             repeated uint32 uuid = 1;
-            required string name = 2;
+            string name = 2;
             repeated MixerUnit mixerUnits = 3;
             message MixerUnit {
-                required SRCLabel src = 1;
+                SRCLabel src = 1;
                 enum SRCLabel {
                     SRC_NONE = 0;
                 
@@ -219,7 +219,7 @@ message Packet {
                     RF_CH4 = 107;
                     RF_CH5 = 108;
                 }
-                required ChannelLabel dst = 2;
+                ChannelLabel dst = 2;
                 enum ChannelLabel {
                     // The following items must be in sequence:
                
@@ -295,11 +295,11 @@ message Packet {
                    HIDDEN49 = 64;
                    HIDDEN50 = 65;
                }
-                required int32 scalar = 3;
-                required int32 offset = 4;
-                required bool applyTrim = 5;
-                optional bool invertSource = 6 [default = false];
-                optional OperationType op = 7 [default = OP_REPLACE];
+                int32 scalar = 3;
+                int32 offset = 4;
+                bool applyTrim = 5;
+                bool invertSource = 6;
+                OperationType op = 7;
                 enum OperationType {
                     OP_REPLACE = 0;
                     OP_ADD = 1;
@@ -310,16 +310,16 @@ message Packet {
             }
             repeated Limits limits = 4;
             message Limits {
-                required sint32 epL = 1;
-                required sint32 epH = 2;
-                required sint32 subtrim = 3;
-                required sint32 limitL = 4;
-                required sint32 limitH = 5;
-                required sint32 failsafe = 6;
-                optional uint32 speed = 7 [default = 0];
-                optional bool invert = 8 [default = false];
+                sint32 epL = 1;
+                sint32 epH = 2;
+                sint32 subtrim = 3;
+                sint32 limitL = 4;
+                sint32 limitH = 5;
+                sint32 failsafe = 6;
+                uint32 speed = 7;
+                bool invert = 8;
             }
-            required RFProtocolType rfProtocolType = 5;
+            RFProtocolType rfProtocolType = 5;
             enum RFProtocolType
             {
                 RF_PROTOCOL_HK310 = 0;
