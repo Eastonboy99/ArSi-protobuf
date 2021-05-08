@@ -289,7 +289,9 @@ typedef struct _Packet_Config_Model_Limits {
     int32_t limitL; 
     int32_t limitH; 
     int32_t failsafe; 
+    bool has_speed;
     uint32_t speed; 
+    bool has_invert;
     bool invert; 
 } Packet_Config_Model_Limits;
 
@@ -299,13 +301,16 @@ typedef struct _Packet_Config_Model_MixerUnit {
     int32_t scalar; 
     int32_t offset; 
     bool applyTrim; 
+    bool has_invertSource;
     bool invertSource; 
+    bool has_op;
     Packet_Config_Model_MixerUnit_OperationType op; 
 } Packet_Config_Model_MixerUnit;
 
 typedef struct _Packet_Config_TX_ControllerInput { 
     Packet_Config_TX_ControllerInput_HardwareType hardwareType; 
     Packet_Config_TX_ControllerInput_InputType inputType; 
+    bool has_inputSubType;
     Packet_Config_TX_ControllerInput_InputSubType inputSubType; 
     uint32_t port; 
     uint32_t calibration[3]; 
@@ -334,9 +339,7 @@ typedef struct _Packet_Config_TX {
 
 typedef struct _Packet_Config { 
     uint32_t version; 
-    bool has_tx;
     Packet_Config_TX tx; 
-    bool has_model;
     Packet_Config_Model model; 
 } Packet_Config;
 
@@ -391,19 +394,19 @@ extern "C" {
 
 /* Initializer values for message structs */
 #define Packet_init_default                      {_Packet_Commands_MIN, false, Packet_Config_init_default}
-#define Packet_Config_init_default               {0, false, Packet_Config_TX_init_default, false, Packet_Config_Model_init_default}
+#define Packet_Config_init_default               {0, Packet_Config_TX_init_default, Packet_Config_Model_init_default}
 #define Packet_Config_TX_init_default            {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default, Packet_Config_TX_ControllerInput_init_default}, 0, 0}
-#define Packet_Config_TX_ControllerInput_init_default {_Packet_Config_TX_ControllerInput_HardwareType_MIN, _Packet_Config_TX_ControllerInput_InputType_MIN, _Packet_Config_TX_ControllerInput_InputSubType_MIN, 0, {0, 0, 0}, 0, {_Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN}}
+#define Packet_Config_TX_ControllerInput_init_default {_Packet_Config_TX_ControllerInput_HardwareType_MIN, _Packet_Config_TX_ControllerInput_InputType_MIN, false, _Packet_Config_TX_ControllerInput_InputSubType_MIN, 0, {0, 0, 0}, 0, {_Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN}}
 #define Packet_Config_Model_init_default         {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default, Packet_Config_Model_MixerUnit_init_default}, 0, {Packet_Config_Model_Limits_init_default, Packet_Config_Model_Limits_init_default, Packet_Config_Model_Limits_init_default, Packet_Config_Model_Limits_init_default, Packet_Config_Model_Limits_init_default}, _Packet_Config_Model_RFProtocolType_MIN}
-#define Packet_Config_Model_MixerUnit_init_default {_Packet_Config_Model_MixerUnit_SRCLabel_MIN, _Packet_Config_Model_MixerUnit_ChannelLabel_MIN, 0, 0, 0, 0, _Packet_Config_Model_MixerUnit_OperationType_MIN}
-#define Packet_Config_Model_Limits_init_default  {0, 0, 0, 0, 0, 0, 0, 0}
+#define Packet_Config_Model_MixerUnit_init_default {_Packet_Config_Model_MixerUnit_SRCLabel_MIN, _Packet_Config_Model_MixerUnit_ChannelLabel_MIN, 0, 0, 0, false, false, false, Packet_Config_Model_MixerUnit_OperationType_OP_REPLACE}
+#define Packet_Config_Model_Limits_init_default  {0, 0, 0, 0, 0, 0, false, 0u, false, false}
 #define Packet_init_zero                         {_Packet_Commands_MIN, false, Packet_Config_init_zero}
-#define Packet_Config_init_zero                  {0, false, Packet_Config_TX_init_zero, false, Packet_Config_Model_init_zero}
+#define Packet_Config_init_zero                  {0, Packet_Config_TX_init_zero, Packet_Config_Model_init_zero}
 #define Packet_Config_TX_init_zero               {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero, Packet_Config_TX_ControllerInput_init_zero}, 0, 0}
-#define Packet_Config_TX_ControllerInput_init_zero {_Packet_Config_TX_ControllerInput_HardwareType_MIN, _Packet_Config_TX_ControllerInput_InputType_MIN, _Packet_Config_TX_ControllerInput_InputSubType_MIN, 0, {0, 0, 0}, 0, {_Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN}}
+#define Packet_Config_TX_ControllerInput_init_zero {_Packet_Config_TX_ControllerInput_HardwareType_MIN, _Packet_Config_TX_ControllerInput_InputType_MIN, false, _Packet_Config_TX_ControllerInput_InputSubType_MIN, 0, {0, 0, 0}, 0, {_Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN, _Packet_Config_TX_ControllerInput_InputLabel_MIN}}
 #define Packet_Config_Model_init_zero            {{0, 0, 0, 0, 0, 0, 0, 0}, "", 0, {Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero, Packet_Config_Model_MixerUnit_init_zero}, 0, {Packet_Config_Model_Limits_init_zero, Packet_Config_Model_Limits_init_zero, Packet_Config_Model_Limits_init_zero, Packet_Config_Model_Limits_init_zero, Packet_Config_Model_Limits_init_zero}, _Packet_Config_Model_RFProtocolType_MIN}
-#define Packet_Config_Model_MixerUnit_init_zero  {_Packet_Config_Model_MixerUnit_SRCLabel_MIN, _Packet_Config_Model_MixerUnit_ChannelLabel_MIN, 0, 0, 0, 0, _Packet_Config_Model_MixerUnit_OperationType_MIN}
-#define Packet_Config_Model_Limits_init_zero     {0, 0, 0, 0, 0, 0, 0, 0}
+#define Packet_Config_Model_MixerUnit_init_zero  {_Packet_Config_Model_MixerUnit_SRCLabel_MIN, _Packet_Config_Model_MixerUnit_ChannelLabel_MIN, 0, 0, 0, false, 0, false, _Packet_Config_Model_MixerUnit_OperationType_MIN}
+#define Packet_Config_Model_Limits_init_zero     {0, 0, 0, 0, 0, 0, false, 0, false, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define Packet_Config_Model_Limits_epL_tag       1
@@ -445,16 +448,16 @@ extern "C" {
 
 /* Struct field encoding specification for nanopb */
 #define Packet_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    type,              1) \
+X(a, STATIC,   REQUIRED, UENUM,    type,              1) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  config,            2)
 #define Packet_CALLBACK NULL
 #define Packet_DEFAULT NULL
 #define Packet_config_MSGTYPE Packet_Config
 
 #define Packet_Config_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   version,           1) \
-X(a, STATIC,   OPTIONAL, MESSAGE,  tx,                2) \
-X(a, STATIC,   OPTIONAL, MESSAGE,  model,             3)
+X(a, STATIC,   REQUIRED, UINT32,   version,           1) \
+X(a, STATIC,   REQUIRED, MESSAGE,  tx,                2) \
+X(a, STATIC,   REQUIRED, MESSAGE,  model,             3)
 #define Packet_Config_CALLBACK NULL
 #define Packet_Config_DEFAULT NULL
 #define Packet_Config_tx_MSGTYPE Packet_Config_TX
@@ -462,19 +465,19 @@ X(a, STATIC,   OPTIONAL, MESSAGE,  model,             3)
 
 #define Packet_Config_TX_FIELDLIST(X, a) \
 X(a, STATIC,   FIXARRAY, UINT32,   uuid,              1) \
-X(a, STATIC,   SINGULAR, STRING,   name,              2) \
+X(a, STATIC,   REQUIRED, STRING,   name,              2) \
 X(a, STATIC,   REPEATED, MESSAGE,  controllerInputs,   3) \
-X(a, STATIC,   SINGULAR, INT32,    trimRange,         4) \
-X(a, STATIC,   SINGULAR, INT32,    trimStepSize,      5)
+X(a, STATIC,   REQUIRED, INT32,    trimRange,         4) \
+X(a, STATIC,   REQUIRED, INT32,    trimStepSize,      5)
 #define Packet_Config_TX_CALLBACK NULL
 #define Packet_Config_TX_DEFAULT NULL
 #define Packet_Config_TX_controllerInputs_MSGTYPE Packet_Config_TX_ControllerInput
 
 #define Packet_Config_TX_ControllerInput_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    hardwareType,      1) \
-X(a, STATIC,   SINGULAR, UENUM,    inputType,         2) \
-X(a, STATIC,   SINGULAR, UENUM,    inputSubType,      3) \
-X(a, STATIC,   SINGULAR, UINT32,   port,              4) \
+X(a, STATIC,   REQUIRED, UENUM,    hardwareType,      1) \
+X(a, STATIC,   REQUIRED, UENUM,    inputType,         2) \
+X(a, STATIC,   OPTIONAL, UENUM,    inputSubType,      3) \
+X(a, STATIC,   REQUIRED, UINT32,   port,              4) \
 X(a, STATIC,   FIXARRAY, UINT32,   calibration,       5) \
 X(a, STATIC,   REPEATED, UENUM,    labels,            6)
 #define Packet_Config_TX_ControllerInput_CALLBACK NULL
@@ -482,37 +485,37 @@ X(a, STATIC,   REPEATED, UENUM,    labels,            6)
 
 #define Packet_Config_Model_FIELDLIST(X, a) \
 X(a, STATIC,   FIXARRAY, UINT32,   uuid,              1) \
-X(a, STATIC,   SINGULAR, STRING,   name,              2) \
+X(a, STATIC,   REQUIRED, STRING,   name,              2) \
 X(a, STATIC,   REPEATED, MESSAGE,  mixerUnits,        3) \
 X(a, STATIC,   REPEATED, MESSAGE,  limits,            4) \
-X(a, STATIC,   SINGULAR, UENUM,    rfProtocolType,    5)
+X(a, STATIC,   REQUIRED, UENUM,    rfProtocolType,    5)
 #define Packet_Config_Model_CALLBACK NULL
 #define Packet_Config_Model_DEFAULT NULL
 #define Packet_Config_Model_mixerUnits_MSGTYPE Packet_Config_Model_MixerUnit
 #define Packet_Config_Model_limits_MSGTYPE Packet_Config_Model_Limits
 
 #define Packet_Config_Model_MixerUnit_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    src,               1) \
-X(a, STATIC,   SINGULAR, UENUM,    dst,               2) \
-X(a, STATIC,   SINGULAR, INT32,    scalar,            3) \
-X(a, STATIC,   SINGULAR, INT32,    offset,            4) \
-X(a, STATIC,   SINGULAR, BOOL,     applyTrim,         5) \
-X(a, STATIC,   SINGULAR, BOOL,     invertSource,      6) \
-X(a, STATIC,   SINGULAR, UENUM,    op,                7)
+X(a, STATIC,   REQUIRED, UENUM,    src,               1) \
+X(a, STATIC,   REQUIRED, UENUM,    dst,               2) \
+X(a, STATIC,   REQUIRED, INT32,    scalar,            3) \
+X(a, STATIC,   REQUIRED, INT32,    offset,            4) \
+X(a, STATIC,   REQUIRED, BOOL,     applyTrim,         5) \
+X(a, STATIC,   OPTIONAL, BOOL,     invertSource,      6) \
+X(a, STATIC,   OPTIONAL, UENUM,    op,                7)
 #define Packet_Config_Model_MixerUnit_CALLBACK NULL
-#define Packet_Config_Model_MixerUnit_DEFAULT NULL
+#define Packet_Config_Model_MixerUnit_DEFAULT (const pb_byte_t*)"\x30\x00\x00"
 
 #define Packet_Config_Model_Limits_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, SINT32,   epL,               1) \
-X(a, STATIC,   SINGULAR, SINT32,   epH,               2) \
-X(a, STATIC,   SINGULAR, SINT32,   subtrim,           3) \
-X(a, STATIC,   SINGULAR, SINT32,   limitL,            4) \
-X(a, STATIC,   SINGULAR, SINT32,   limitH,            5) \
-X(a, STATIC,   SINGULAR, SINT32,   failsafe,          6) \
-X(a, STATIC,   SINGULAR, UINT32,   speed,             7) \
-X(a, STATIC,   SINGULAR, BOOL,     invert,            8)
+X(a, STATIC,   REQUIRED, SINT32,   epL,               1) \
+X(a, STATIC,   REQUIRED, SINT32,   epH,               2) \
+X(a, STATIC,   REQUIRED, SINT32,   subtrim,           3) \
+X(a, STATIC,   REQUIRED, SINT32,   limitL,            4) \
+X(a, STATIC,   REQUIRED, SINT32,   limitH,            5) \
+X(a, STATIC,   REQUIRED, SINT32,   failsafe,          6) \
+X(a, STATIC,   OPTIONAL, UINT32,   speed,             7) \
+X(a, STATIC,   OPTIONAL, BOOL,     invert,            8)
 #define Packet_Config_Model_Limits_CALLBACK NULL
-#define Packet_Config_Model_Limits_DEFAULT NULL
+#define Packet_Config_Model_Limits_DEFAULT (const pb_byte_t*)"\x38\x00\x40\x00\x00"
 
 extern const pb_msgdesc_t Packet_msg;
 extern const pb_msgdesc_t Packet_Config_msg;
